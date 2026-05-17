@@ -1,0 +1,148 @@
+# krkn-ps-fixture — all K8s objects in one file.
+#
+# Every resource here is deliberate: the discovery design for krkn-ai#188 needs
+# to handle each kind/shape. See ../fixtures/README.md for the resource map.
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: krkn-ps-fixture
+  labels:
+    purpose: krkn-ai-188-discovery-test
+---
+# Deployment: 2 replicas, 2 containers each, labels exercise pod/app-outage/container/dns discovery.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+  namespace: krkn-ps-fixture
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+      service: frontend
+  template:
+    metadata:
+      labels:
+        app: web
+        service: frontend
+        env: dev
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: data
+              mountPath: /var/data
+        - name: sidecar
+          image: busybox:1.36
+          command: ["sh", "-c", "while true; do echo tick; sleep 60; done"]
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: web-data
+---
+# PVC: validates pvc-scenarios discovery.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: web-data
+  namespace: krkn-ps-fixture
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+# ClusterIP Service: backend for Ingress, also gives the namespace "services with ports"
+# so syn-flood passes validation.
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-svc
+  namespace: krkn-ps-fixture
+  labels:
+    app: web
+spec:
+  type: ClusterIP
+  selector:
+    app: web
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
+---
+# LoadBalancer Service: stays Pending on plain kind without MetalLB.
+# This is the intentional graceful-degradation case from blueprint §6 —
+# discovery should skip it when status.loadBalancer.ingress is empty.
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-lb
+  namespace: krkn-ps-fixture
+  labels:
+    app: web
+    role: external
+spec:
+  type: LoadBalancer
+  selector:
+    app: web
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+---
+# Ingress: validates URL extraction from spec.rules[].host + paths.
+# Reachable from the host at http://web.test.local/ when
+# /etc/hosts has: 127.0.0.1 web.test.local
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ing
+  namespace: krkn-ps-fixture
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: web.test.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-svc
+                port:
+                  number: 80
+          - path: /healthz/notfound
+            pathType: Exact
+            backend:
+              service:
+                name: web-svc
+                port:
+                  number: 80
+---
+# Orphan Ingress: deliberately references a non-existent ingress class.
+# Validates the warn-but-include path from blueprint §6's IngressClass gating.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: orphan-ing
+  namespace: krkn-ps-fixture
+spec:
+  ingressClassName: nonexistent
+  rules:
+    - host: orphan.test.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-svc
+                port:
+                  number: 80

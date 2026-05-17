@@ -1,0 +1,31 @@
+# kind config for krkn-ps-fixture sandbox.
+#
+# - 1 control-plane + 2 workers: gives 2 schedulable Ready workers, enough for
+#   the validator to allow node-cpu-hog / node-memory-hog / node-io-hog if
+#   --enable-destructive is passed. (Hogging the kind control-plane node would
+#   take the API server down.)
+# - ingress-ready=true label on control-plane: required by the kind ingress-nginx
+#   manifest's nodeSelector so the controller schedules onto a node with hostPort
+#   bindings.
+# - extraPortMappings 80/443 on control-plane: makes the Ingress reachable from
+#   the host at http://localhost/ once /etc/hosts maps web.test.local to 127.0.0.1.
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: krkn-ps-fixture
+nodes:
+  - role: control-plane
+    kubeadmConfigPatches:
+      - |
+        kind: InitConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-labels: "ingress-ready=true"
+    extraPortMappings:
+      - containerPort: 80
+        hostPort: 80
+        protocol: TCP
+      - containerPort: 443
+        hostPort: 443
+        protocol: TCP
+  - role: worker
+  - role: worker
