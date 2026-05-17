@@ -139,7 +139,7 @@ Dynamic-discovery implication:
 - `ScenarioFactory.generate_valid_scenarios` can already compute the eligible set from discovered components.
 - `discover` should delegate to it rather than duplicating scenario rules.
 
-## Gap 5: Vanilla Kubernetes Node Interface Discovery Fails OpenShift-Specific Path
+## Gap 5: Kubernetes Node Interface Discovery Fails OpenShift-Specific Path
 
 Discover logs:
 
