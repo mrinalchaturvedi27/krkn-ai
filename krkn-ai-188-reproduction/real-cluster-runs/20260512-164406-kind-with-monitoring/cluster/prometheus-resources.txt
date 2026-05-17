@@ -1,0 +1,2 @@
+NAMESPACE    NAME                                   VERSION              DESIRED   READY   RECONCILED   AVAILABLE   AGE
+monitoring   kps-kube-prometheus-stack-prometheus   v3.11.3-distroless   1         1       True         True        17m

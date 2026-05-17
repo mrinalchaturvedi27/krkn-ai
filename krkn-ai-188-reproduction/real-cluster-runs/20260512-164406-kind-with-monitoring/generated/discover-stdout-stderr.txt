@@ -1,0 +1,24 @@
+[WARNING] Unable to find VMIs in namespace krkn-ps-fixture
+[ERROR] Failed to list node interfaces for node krkn-ps-fixture-control-plane: [Errno 2] No such file or directory: 'oc'
+[WARNING] Failed to fetch node metrics for node krkn-ps-fixture-control-plane: (404)
+Reason: Not Found
+HTTP response headers: HTTPHeaderDict({'Audit-Id': '6dfde4c7-333c-4f88-b1e2-001253f334db', 'Cache-Control': 'no-cache, private', 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'X-Kubernetes-Pf-Flowschema-Uid': 'aee73353-315c-4032-814e-19717949da59', 'X-Kubernetes-Pf-Prioritylevel-Uid': '09e79597-7430-4870-a537-88764e2b5d9c', 'Date': 'Tue, 12 May 2026 11:14:22 GMT', 'Content-Length': '19'})
+HTTP response body: 404 page not found
+
+
+[ERROR] Failed to list node interfaces for node krkn-ps-fixture-worker: [Errno 2] No such file or directory: 'oc'
+[WARNING] Failed to fetch node metrics for node krkn-ps-fixture-worker: (404)
+Reason: Not Found
+HTTP response headers: HTTPHeaderDict({'Audit-Id': 'e9a1f9d6-1fe3-484a-a6d3-60bc9e84b60a', 'Cache-Control': 'no-cache, private', 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'X-Kubernetes-Pf-Flowschema-Uid': 'aee73353-315c-4032-814e-19717949da59', 'X-Kubernetes-Pf-Prioritylevel-Uid': '09e79597-7430-4870-a537-88764e2b5d9c', 'Date': 'Tue, 12 May 2026 11:14:22 GMT', 'Content-Length': '19'})
+HTTP response body: 404 page not found
+
+
+[ERROR] Failed to list node interfaces for node krkn-ps-fixture-worker2: [Errno 2] No such file or directory: 'oc'
+[WARNING] Failed to fetch node metrics for node krkn-ps-fixture-worker2: (404)
+Reason: Not Found
+HTTP response headers: HTTPHeaderDict({'Audit-Id': 'db5be605-b0d0-43e6-9431-6aa2325f30fd', 'Cache-Control': 'no-cache, private', 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'X-Kubernetes-Pf-Flowschema-Uid': 'aee73353-315c-4032-814e-19717949da59', 'X-Kubernetes-Pf-Prioritylevel-Uid': '09e79597-7430-4870-a537-88764e2b5d9c', 'Date': 'Tue, 12 May 2026 11:14:22 GMT', 'Content-Length': '19'})
+HTTP response body: 404 page not found
+
+
+[INFO] Saved component configuration to _local/LFX/real-cluster-runs/20260512-164406-kind-with-monitoring/generated/current-discover.yaml
+

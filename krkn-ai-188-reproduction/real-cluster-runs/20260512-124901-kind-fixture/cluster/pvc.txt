@@ -1,0 +1,2 @@
+NAMESPACE         NAME       STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+krkn-ps-fixture   web-data   Bound    pvc-bcb41b06-ecc2-4905-bb29-37dcbd92b6d3   1Gi        RWO            standard       <unset>                 2m23s

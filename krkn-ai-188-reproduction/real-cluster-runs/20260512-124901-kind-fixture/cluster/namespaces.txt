@@ -1,0 +1,8 @@
+NAME                 STATUS   AGE
+default              Active   3m52s
+ingress-nginx        Active   3m41s
+krkn-ps-fixture      Active   2m22s
+kube-node-lease      Active   3m52s
+kube-public          Active   3m52s
+kube-system          Active   3m52s
+local-path-storage   Active   3m48s
