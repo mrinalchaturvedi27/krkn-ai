@@ -1,0 +1,4 @@
+NAME                            STATUS   ROLES           AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION      CONTAINER-RUNTIME
+krkn-ps-fixture-control-plane   Ready    control-plane   3m53s   v1.35.0   172.18.0.2    <none>        Debian GNU/Linux 12 (bookworm)   6.8.0-100-generic   containerd://2.2.0
+krkn-ps-fixture-worker          Ready    <none>          3m43s   v1.35.0   172.18.0.4    <none>        Debian GNU/Linux 12 (bookworm)   6.8.0-100-generic   containerd://2.2.0
+krkn-ps-fixture-worker2         Ready    <none>          3m43s   v1.35.0   172.18.0.3    <none>        Debian GNU/Linux 12 (bookworm)   6.8.0-100-generic   containerd://2.2.0

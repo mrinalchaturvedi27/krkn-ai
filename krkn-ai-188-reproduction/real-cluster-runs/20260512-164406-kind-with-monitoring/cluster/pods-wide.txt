@@ -1,0 +1,25 @@
+NAMESPACE            NAME                                                    READY   STATUS      RESTARTS        AGE     IP           NODE                            NOMINATED NODE   READINESS GATES
+ingress-nginx        ingress-nginx-admission-create-tj2kw                    0/1     Completed   0               3h57m   <none>       krkn-ps-fixture-worker2         <none>           <none>
+ingress-nginx        ingress-nginx-admission-patch-mll4r                     0/1     Completed   1               3h57m   <none>       krkn-ps-fixture-worker2         <none>           <none>
+ingress-nginx        ingress-nginx-controller-7b9b9dc95d-8q865               1/1     Running     2 (2m54s ago)   3h57m   10.244.0.5   krkn-ps-fixture-control-plane   <none>           <none>
+krkn-ps-fixture      web-app-65cf5fbd4f-ffc2n                                2/2     Running     4 (2m54s ago)   3h56m   10.244.2.2   krkn-ps-fixture-worker          <none>           <none>
+krkn-ps-fixture      web-app-65cf5fbd4f-txz7f                                2/2     Running     4 (2m54s ago)   3h56m   10.244.2.3   krkn-ps-fixture-worker          <none>           <none>
+kube-system          coredns-7d764666f9-dxftj                                1/1     Running     2 (2m54s ago)   3h57m   10.244.0.3   krkn-ps-fixture-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-fqlqv                                1/1     Running     2 (2m54s ago)   3h57m   10.244.0.4   krkn-ps-fixture-control-plane   <none>           <none>
+kube-system          etcd-krkn-ps-fixture-control-plane                      1/1     Running     0               2m49s   172.18.0.3   krkn-ps-fixture-control-plane   <none>           <none>
+kube-system          kindnet-ftlq8                                           1/1     Running     2 (2m54s ago)   3h57m   172.18.0.4   krkn-ps-fixture-worker2         <none>           <none>
+kube-system          kindnet-g7pxt                                           1/1     Running     2 (2m54s ago)   3h57m   172.18.0.2   krkn-ps-fixture-worker          <none>           <none>
+kube-system          kindnet-ggbxd                                           1/1     Running     2 (2m54s ago)   3h57m   172.18.0.3   krkn-ps-fixture-control-plane   <none>           <none>
+kube-system          kube-apiserver-krkn-ps-fixture-control-plane            1/1     Running     0               2m49s   172.18.0.3   krkn-ps-fixture-control-plane   <none>           <none>
+kube-system          kube-controller-manager-krkn-ps-fixture-control-plane   1/1     Running     2 (2m54s ago)   3h57m   172.18.0.3   krkn-ps-fixture-control-plane   <none>           <none>
+kube-system          kube-proxy-5zw8z                                        1/1     Running     2 (2m54s ago)   3h57m   172.18.0.2   krkn-ps-fixture-worker          <none>           <none>
+kube-system          kube-proxy-nvm6v                                        1/1     Running     2 (2m54s ago)   3h57m   172.18.0.3   krkn-ps-fixture-control-plane   <none>           <none>
+kube-system          kube-proxy-xbx6r                                        1/1     Running     2 (2m54s ago)   3h57m   172.18.0.4   krkn-ps-fixture-worker2         <none>           <none>
+kube-system          kube-scheduler-krkn-ps-fixture-control-plane            1/1     Running     2 (2m54s ago)   3h57m   172.18.0.3   krkn-ps-fixture-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-wkdqg                 1/1     Running     4 (2m18s ago)   3h57m   10.244.0.2   krkn-ps-fixture-control-plane   <none>           <none>
+monitoring           kps-kube-prometheus-stack-operator-7dfc85cd64-qb6lf     1/1     Running     2 (2m21s ago)   17m     10.244.1.3   krkn-ps-fixture-worker2         <none>           <none>
+monitoring           kps-kube-state-metrics-75cd687859-67qjt                 1/1     Running     2 (2m16s ago)   17m     10.244.1.2   krkn-ps-fixture-worker2         <none>           <none>
+monitoring           kps-prometheus-node-exporter-rpnms                      1/1     Running     1 (2m54s ago)   17m     172.18.0.3   krkn-ps-fixture-control-plane   <none>           <none>
+monitoring           kps-prometheus-node-exporter-scb6z                      1/1     Running     1 (2m54s ago)   17m     172.18.0.2   krkn-ps-fixture-worker          <none>           <none>
+monitoring           kps-prometheus-node-exporter-z64kg                      1/1     Running     1 (2m54s ago)   17m     172.18.0.4   krkn-ps-fixture-worker2         <none>           <none>
+monitoring           prometheus-kps-kube-prometheus-stack-prometheus-0       2/2     Running     2 (2m54s ago)   15m     10.244.1.4   krkn-ps-fixture-worker2         <none>           <none>
