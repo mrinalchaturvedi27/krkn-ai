@@ -1,6 +1,0 @@
-has_health_checks: False
-fitness_query: sum(kube_pod_container_status_restarts_total)
-scenario: {'pod-scenarios': {'enable': True}, 'application-outages': {'enable': True}, 'container-scenarios': {'enable': True}, 'node-cpu-hog': {'enable': False}, 'node-memory-hog': {'enable': False}, 'node-io-hog': {'enable': False}, 'time-scenarios': {'enable': False}, 'network-scenarios': {'enable': False}, 'dns-outage': {'enable': True}, 'syn-flood': {'enable': False}, 'pvc-scenarios': {'enable': False}, 'kubevirt-scenarios': {'enable': False}}
-cluster_components_namespaces: ['krkn-ps-fixture']
-namespace_summary: krkn-ps-fixture pods= 2 services= 2 pvcs= 1 vmis= 0
-

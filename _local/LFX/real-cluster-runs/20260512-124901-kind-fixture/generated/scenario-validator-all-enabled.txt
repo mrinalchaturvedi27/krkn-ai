@@ -1,5 +1,0 @@
-Unable to initialize scenario network_scenarios, please make sure cluster components for scenario are valid
-Unable to initialize scenario kubevirt_scenarios, please make sure cluster components for scenario are valid
-
-['pod_scenarios', 'application_outages', 'container_scenarios', 'node_cpu_hog', 'node_memory_hog', 'node_io_hog', 'time_scenarios', 'dns_outage', 'syn_flood', 'pvc_scenarios']
-
