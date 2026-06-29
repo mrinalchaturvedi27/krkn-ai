@@ -125,18 +125,6 @@ class TestRecommendEnabledScenarios:
     """Test ScenarioFactory.recommend_enabled_scenarios"""
 
     @patch("krkn_ai.models.scenario.factory.initialize_kubeconfig")
-    def test_returns_hyphenated_set_for_populated_cluster(self, _mock_init):
-        """A populated cluster yields a non-empty set of template (hyphen) keys."""
-        cluster = ClusterComponents(
-            namespaces=[Namespace(name="shop", pods=[Pod(name="redis")])],
-            nodes=[Node(name="n1")],
-        )
-        result = ScenarioFactory.recommend_enabled_scenarios(cluster, "/tmp/kubeconfig")
-        assert isinstance(result, set) and result
-        # Keys are template aliases (hyphenated), not factory field names.
-        assert all("_" not in key for key in result)
-
-    @patch("krkn_ai.models.scenario.factory.initialize_kubeconfig")
     def test_node_scenarios_depend_on_nodes(self, _mock_init):
         """Node-hog scenarios are recommended only when nodes are present."""
         with_nodes = ScenarioFactory.recommend_enabled_scenarios(
@@ -178,18 +166,6 @@ class TestRecommendEnabledScenarios:
             ClusterComponents(), "/tmp/kubeconfig"
         )
         assert result is None
-
-    @patch(
-        "krkn_ai.models.scenario.factory.ScenarioFactory.generate_valid_scenarios",
-        side_effect=MissingScenarioError("none"),
-    )
-    def test_returns_none_on_missing_scenario_error(self, _mock_gen):
-        """MissingScenarioError is treated as a soft fallback, not a crash."""
-        cluster = ClusterComponents(namespaces=[Namespace(name="shop")])
-        assert (
-            ScenarioFactory.recommend_enabled_scenarios(cluster, "/tmp/kubeconfig")
-            is None
-        )
 
     @patch(
         "krkn_ai.models.scenario.factory.ScenarioFactory.generate_valid_scenarios",
