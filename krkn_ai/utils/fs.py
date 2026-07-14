@@ -183,11 +183,12 @@ def _write_fresh(
     kubeconfig: str,
     scenario_enables: dict = None,
     health_checks: list = None,
+    fitness_queries: list = None,
 ):
     """Write fresh config from discovered components."""
     data = components.model_dump(mode="json", warnings="none", exclude_defaults=True)
     template = create_krkn_ai_template(
-        kubeconfig, data, scenario_enables, health_checks
+        kubeconfig, data, scenario_enables, health_checks, fitness_queries
     )
     with open(output, "w", encoding="utf-8") as f:
         f.write(template)
@@ -201,6 +202,7 @@ def save_discovery(
     kubeconfig: str,
     scenario_enables: dict = None,
     health_checks: list = None,
+    fitness_queries: list = None,
 ):
     """Save discovered components per strategy: skip (do nothing), overwrite (replace), or merge (add new)."""
     strategy = strategy.lower()
@@ -226,4 +228,11 @@ def save_discovery(
     if exists and strategy == "overwrite":
         logger.warning("Overwriting existing %s", output)
 
-    _write_fresh(output, components, kubeconfig, scenario_enables, health_checks)
+    _write_fresh(
+        output,
+        components,
+        kubeconfig,
+        scenario_enables,
+        health_checks,
+        fitness_queries,
+    )

@@ -22,6 +22,8 @@ from krkn_ai.models.custom_errors import (
     UniqueScenariosError,
 )
 from krkn_ai.utils.fs import read_config_from_file, save_discovery
+from krkn_ai.utils.prometheus import create_prometheus_client
+from krkn_ai.utils.catalog import recommend_fitness_queries
 from krkn_ai.cluster import ClusterManager
 from krkn_ai.models.scenario.factory import ScenarioFactory
 
@@ -309,6 +311,22 @@ def discover(
         if fresh_write
         else None
     )
+    # Dynamic-first: suggest fitness queries validated against the cluster's
+    # Prometheus. Falls back to the static template default if Prometheus is
+    # unreachable, so discovery never fails on a cluster without monitoring.
+    fitness_queries = None
+    if fresh_write:
+        try:
+            prom_client = create_prometheus_client(kubeconfig)
+            fitness_queries = recommend_fitness_queries(
+                cluster_components, prom_client
+            )
+        except PrometheusConnectionError as e:
+            logger.info(
+                "Prometheus unavailable; using static fitness default (%s).", e
+            )
+        except Exception as e:
+            logger.debug("Fitness query recommendation failed: %s", e)
     save_discovery(
         output,
         save_strategy,
@@ -316,4 +334,5 @@ def discover(
         kubeconfig,
         scenario_enables=scenario_enables,
         health_checks=health_checks,
+        fitness_queries=fitness_queries,
     )
